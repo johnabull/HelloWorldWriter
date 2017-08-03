@@ -8,8 +8,6 @@ namespace Interfaces
 {
     public interface IWriterAPI
     {
-        IConfigurationReader ConfigurationReader { get; set; }
-
         bool WriteDefaultMessage();
         bool WriteCustomMessage(string message);
     }

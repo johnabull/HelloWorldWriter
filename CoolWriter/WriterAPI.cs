@@ -10,16 +10,17 @@ namespace API
 {
     public class WriterAPI : IWriterAPI
     {
-        //Set via dependency injection... structure map or the like
-        public IConfigurationReader ConfigurationReader { get; set; }
+        //Gets set via dependency injection
+        IConfigurationReader ConfigurationReader { get; set; }
+        //Gets set based on configured Writer Type Id
         IWriter Writer { get; set; }
 
         public WriterAPI()
         {
-            //For now, since we don't have our IOC Container configured...
+            //Resolve Configuration Reader instance using structure map
             var container = new StructureMapConfiguration().container;
             ConfigurationReader = container.GetInstance<IConfigurationReader>();
-            //Set Writer instance from config
+            //Get the correct Writer instance based on Writer Type Id
             switch(ConfigurationReader.WriterTypeId)
             {
                 case 1:
