@@ -58,11 +58,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CoolWriterClasses\Classes.csproj">
+    <ProjectReference Include="..\Classes\Classes.csproj">
       <Project>{15549aa4-42a4-4ad2-a6c5-da1c67bb7527}</Project>
       <Name>Classes</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CoolWriter\API.csproj">
+    <ProjectReference Include="..\API\API.csproj">
       <Project>{75254d9a-062d-459a-bd10-e3a359af89a5}</Project>
       <Name>API</Name>
     </ProjectReference>
