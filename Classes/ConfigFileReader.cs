@@ -12,19 +12,28 @@ namespace Classes
     //Gives you all your necessary config options by reading them from an App.config file
     public class ConfigFileReader : IConfigurationReader
     {
-        public int WriterTypeId { get; set; }
-        public string DefaultMessage { get; set; }
+        public int WriterTypeId 
+        { 
+            get
+            {
+                int writerTypeId = 0;
+                int.TryParse(ConfigurationManager.AppSettings["WriterTypeId"], out writerTypeId);
+                    
+                return writerTypeId;
+            }
+        }
+
+        public string DefaultMessage
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["DefaultMessage"];
+            }
+        }
 
         public ConfigFileReader()
         {
-            //Try to get the writer Type Id from the config file
-            int writerTypeId = 0;
-            if (int.TryParse(ConfigurationManager.AppSettings["WriterTypeId"], out writerTypeId))
-                WriterTypeId = writerTypeId;
-            else
-                throw new Exception("Invalid Writer Type Id");
-
-            DefaultMessage = ConfigurationManager.AppSettings["DefaultMessage"];
+            
         }
     }
 }

@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Interfaces
 {
-    public interface IConfigurationReader
+    public interface IResolver
     {
-        int WriterTypeId { get; }
-        string DefaultMessage { get; }
+        IWriter ResolveWriter(int writerTypeId);
     }
 }

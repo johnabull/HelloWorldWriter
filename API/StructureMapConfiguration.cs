@@ -17,10 +17,12 @@ namespace API
             container = new Container(x =>
             {
                 x.For<IConfigurationReader>().Use<ConfigFileReader>();
+                x.For<IResolver>().Use<Resolver>();
 
                 x.Policies.SetAllProperties(y =>
                 {
                     y.OfType<IConfigurationReader>();
+                    y.OfType<IResolver>();
                 });
             });
         }

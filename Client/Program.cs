@@ -11,8 +11,9 @@ namespace CoolWriterRunner
     {
         static void Main(string[] args)
         {
-            var coolWriter = new WriterAPI();
-            coolWriter.WriteDefaultMessage();
+            var writerAPI = new WriterAPI();
+            writerAPI.WriteDefaultMessage();
+            writerAPI.WriteCustomMessage("Hello Universe");
         }
     }
 }

@@ -11,40 +11,29 @@ namespace API
     public class WriterAPI : IWriterAPI
     {
         //Gets set via dependency injection
-        IConfigurationReader ConfigurationReader { get; set; }
-        //Gets set based on configured Writer Type Id
-        IWriter Writer { get; set; }
+        public IConfigurationReader ConfigurationReader { get; set; }
+        public IResolver Resolver { get; set; }
 
         public WriterAPI()
         {
             //Resolve Configuration Reader instance using structure map
             var container = new StructureMapConfiguration().container;
-            ConfigurationReader = container.GetInstance<IConfigurationReader>();
-            //Get the correct Writer instance based on Writer Type Id
-            switch(ConfigurationReader.WriterTypeId)
-            {
-                case 1:
-                    Writer = new ConsoleWriter();
-                    break;
-                case 2:
-                    Writer = new DatabaseWriter();
-                    break;
-                default:
-                    Writer = new ConsoleWriter();
-                    break;
-            }
-        }
+            container.BuildUp(this);
+        }        
 
         public bool WriteDefaultMessage()
         {
-            return Writer.Write(ConfigurationReader.DefaultMessage);
+            var writer = Resolver.ResolveWriter(ConfigurationReader.WriterTypeId);
+            return writer.Write(ConfigurationReader.DefaultMessage);
         }
 
         public bool WriteCustomMessage(string message)
         {
+            var writer = Resolver.ResolveWriter(ConfigurationReader.WriterTypeId);
             if (string.IsNullOrEmpty(message))
-                message = ConfigurationReader.DefaultMessage;
-            return Writer.Write(message);
+                return writer.Write(ConfigurationReader.DefaultMessage);
+            else
+                return writer.Write(message);
         }
     }
 }
