@@ -14,6 +14,9 @@ namespace API
         public IConfigurationReader ConfigurationReader { get; set; }
         public IResolver Resolver { get; set; }
 
+        /// <summary>
+        /// API Constructor
+        /// </summary>
         public WriterAPI()
         {
             //Resolve Configuration Reader instance using structure map
@@ -21,12 +24,21 @@ namespace API
             container.BuildUp(this);
         }        
 
+        /// <summary>
+        /// Write default message from configuration
+        /// </summary>
+        /// <returns>Returns True if message written</returns>
         public bool WriteDefaultMessage()
         {
             var writer = Resolver.ResolveWriter(ConfigurationReader.WriterTypeId);
             return writer.Write(ConfigurationReader.DefaultMessage);
         }
 
+        /// <summary>
+        /// Write a cusom message
+        /// </summary>
+        /// <param name="message">Message to output/save</param>
+        /// <returns>Returns True if message written</returns>
         public bool WriteCustomMessage(string message)
         {
             var writer = Resolver.ResolveWriter(ConfigurationReader.WriterTypeId);

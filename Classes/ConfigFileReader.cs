@@ -9,7 +9,7 @@ using System.Configuration;
 namespace Classes
 {
     //A concrete implementation of the IConfigurationReader interface
-    //Gives you all your necessary config options by reading them from an App.config file
+    //Provides all necessary config options by reading them from an App.config file
     public class ConfigFileReader : IConfigurationReader
     {
         public int WriterTypeId 
